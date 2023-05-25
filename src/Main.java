@@ -6,5 +6,6 @@ public class Main {
         Skrzyzowanie skrzyzowanie = new Skrzyzowanie();
         Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie);
+        System.out.println("dupa");
     }
 }
