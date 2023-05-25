@@ -1,0 +1,49 @@
+[skrzyzowanie]
+
+[droga]
+0
+0
+0
+90
+
+[slot]
+0
+0
+2
+
+[slot]
+1
+0
+1
+
+[droga]
+1
+30
+30
+180
+
+[slot]
+0
+0
+2
+
+[slot]
+id = 1
+rodzaj = 0
+kierunek = 1
+
+[droga]
+id = 2
+poz.x = 60
+poz.y = 0
+rotate = 270
+
+[slot]
+id = 0
+rodzaj = 0
+kierunek = 2
+
+[slot]
+id = 1
+rodzaj = 0
+kierunek = 1
