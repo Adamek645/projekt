@@ -10,7 +10,7 @@ public class Skrzyzowanie {
         this.drogi = drogi;
     }
     public void nwm(Skrzyzowanie skrzyzowanie) throws FileNotFoundException {
-        File skrzyz = new File(WyborPliku.plik());
+        File skrzyz = new File("skrzyzowanie.txt");
         Scanner in = new Scanner(skrzyz);
         dodanie_drog(in, skrzyzowanie);
     }
