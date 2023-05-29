@@ -7,4 +7,7 @@ public class Slot {
         this.rodzaj = rodzaj;
         this.kierunek = kierunek;
     }
+    public int getId() { return id; }
+    public int getRodzaj() { return rodzaj; }
+    public int getKierunek() { return kierunek; }
 }
