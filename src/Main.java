@@ -9,5 +9,6 @@ public class Main {
         skrzyzowanie.nwm(skrzyzowanie);
         /* Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie); */
+        Symulacja.generowanieRuchu();
     }
 }
