@@ -10,7 +10,7 @@ public class Autobus extends Pojazd {
         ArrayList<Autobus> list = new ArrayList<>();
         Random generator = new Random();
         for(int i = 0;i<ilosc;i++){
-            list.add(new Autobus(generator.nextInt(30)+10));
+            list.add(new Autobus(generator.nextInt(20)+20));
         }
         return Autobus.list = list;
     }

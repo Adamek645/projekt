@@ -10,7 +10,7 @@ public class Ciezarowka extends Pojazd {
         ArrayList<Ciezarowka> list = new ArrayList<>();
         Random generator = new Random();
         for(int i = 0;i<ilosc;i++){
-            list.add(new Ciezarowka(generator.nextInt(40)+10));
+            list.add(new Ciezarowka(generator.nextInt(30)+20));
         }
         return Ciezarowka.list = list;
     }

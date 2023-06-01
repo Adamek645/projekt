@@ -9,7 +9,7 @@ public class Samochod extends Pojazd {
         ArrayList<Samochod> list = new ArrayList<>();
         Random generator = new Random();
         for(int i = 0;i<ilosc;i++){
-            list.add(new Samochod(generator.nextInt(40)+10));
+            list.add(new Samochod(generator.nextInt(20)+30));
         }
         return  Samochod.list = list;
     }
