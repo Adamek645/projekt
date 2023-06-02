@@ -67,7 +67,7 @@ public class Sciezka {
                 else if (x1 <= 0 && x2 < 0)
                     return abs(x2 - x1);
             }
-            if (y1 != y2) {
+            if (y1 != y2) { // dodatkowo uwzględniono współczynnik zmieniający kształt, docelowo będzie obliczany
                 double xsqrt = 0;
                 double ysqrt = 0;
                 if (x1 <= 0 && x2 > 0)
@@ -82,7 +82,7 @@ public class Sciezka {
                     xsqrt = (abs(y2 - y1) * abs(y2 - y1));
                 else if (x1 <= 0 && x2 < 0)
                     xsqrt = (abs(y2 - y1) * abs(y2 - y1));
-                return sqrt(xsqrt + ysqrt);
+                return sqrt(xsqrt + ysqrt) * 1.3;
             }
         } else if (x1 == x2) {
             if (y1 == y2)
