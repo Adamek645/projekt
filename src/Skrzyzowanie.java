@@ -6,11 +6,16 @@ import java.util.Scanner;
 
 public class Skrzyzowanie {
     private List<Droga> drogi;
-    Skrzyzowanie(List<Droga> drogi) {
+    private List<Sciezka> sciezki;
+    Skrzyzowanie(List<Droga> drogi, List<Sciezka> sciezki) {
         this.drogi = drogi;
+        this.sciezki = sciezki;
     }
-    public void nwm() throws FileNotFoundException {
+    public void nwm() throws FileNotFoundException { // wczytanie pliku
         File skrzyz = new File("skrzyzowanie.txt");
+        /* wczytany plik składa się z segmentów, z których odczytuje dane dla drogi i slotów:
+        * drogi - numer (na chwilę obecną w celach testowych, docelowo bez), pozycja w osi x, pozycja w osi y, obrót
+        * sloty - numer (na chwilę obecną w celach testowych, docelowo bez), rodzaj transportu (samochod, transport zbiorowy), kierunek (1 wejście, 2 wyjście) */
         Scanner in = new Scanner(skrzyz);
         dodanie_drog(in);
     }
@@ -25,7 +30,7 @@ public class Skrzyzowanie {
                             Droga drogs = new Droga(in.nextInt(), in.nextDouble(), in.nextDouble(), in.nextInt(), slots);
                             Droga.dodanie_slot(in, slots);
                             drogi.add(drogs);
-                            /* System.out.println("Dodano droge nr " + drogi.get(drogi.size() - 1).getId() +
+                            System.out.println("Dodano droge nr " + drogi.get(drogi.size() - 1).getId() +
                                     " o pozycji x/y:\nx: " + drogi.get(drogi.size() - 1).getPozx()
                                     + "\ny: " + drogi.get(drogi.size() - 1).getPozy() + "\npod katem: " +
                                     drogi.get(drogi.size() - 1).getRotate() + "\nze slotami: ");
@@ -39,7 +44,7 @@ public class Skrzyzowanie {
                                     }
                                     System.out.println(drogi.get(drogi.size() - 1).getSloty(i,j));
                                 }
-                            } */
+                            }
                         } else {
                             left++;
                             System.out.println("tak");

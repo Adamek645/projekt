@@ -4,10 +4,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        List<Droga> drogi = new ArrayList<Droga>();
-        Skrzyzowanie skrzyzowanie = new Skrzyzowanie(drogi);
+        List<Droga> drogi = new ArrayList<>();
+        List<Sciezka> sciezki = new ArrayList<>();
+        Skrzyzowanie skrzyzowanie = new Skrzyzowanie(drogi, sciezki);
         skrzyzowanie.nwm();
-        System.out.println(skrzyzowanie.getSloty(2,1,2));
+        Sciezka.dodanieSciezki(skrzyzowanie, sciezki);
         /* Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie); */
         // generowanie ruchu dla 2 cyklów symulacji (światła)
