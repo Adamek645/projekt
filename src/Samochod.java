@@ -1,20 +1,20 @@
-import java.util.ArrayList;
-import java.util.Random;
 public class Samochod extends Pojazd {
-    static ArrayList<Samochod> list;
-    static ArrayList<Samochod> getList() {
-        return list;
-    }
-    static ArrayList<Samochod> generowanie_listy(int ilosc){
-        ArrayList<Samochod> list = new ArrayList<>();
-        Random generator = new Random();
-        for(int i = 0;i<ilosc;i++){
-            list.add(new Samochod(generator.nextInt(20)+30));
-        }
-        return  Samochod.list = list;
-    }
-    Samochod(int vmax){
+    int kx, ky;
+
+    Samochod(int vmax, int kx, int ky) {
         super(vmax);
         setVmax(vmax);
+        this.kx = kx;
+        this.ky = ky;
     }
+/*
+    public void ruch() {
+        z obecnych koordynatów pojazdu oraz jego prędkości przemieść się do przodu o taką ilość koordynatów na liście
+    }
+    public void tura(plus sprawdzenie kolizji)(){
+        if(koordnynaty pojazdu + tyle ile przebędzie ze swoją prędkością są zajęte !! Są puste)
+        to zatrzymaj się do koordynatu najbliższego co do zajętego
+        W przeciwnym wypadku wykonaj ruch
+    }
+ */
 }
