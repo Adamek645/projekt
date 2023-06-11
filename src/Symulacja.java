@@ -14,16 +14,15 @@ public class Symulacja {
 
     }
     Map mapa = new Map(60, 60);
-    public static void generowaniePojazdu(){
+    public static void generowaniePojazdu(int x, int y){
         Random random = new Random();
         int los = random.nextInt(10);
         if(los < 4)
-            Pojazd.List.add(new Samochod((random.nextInt(2) + 3), 0, 0));
+            Map.setMap(x,y,Pojazd.List.add(new Samochod((random.nextInt(2) + 3))));
         else if(los < 6)
-            Pojazd.List.add(new Autobus((random.nextInt(2) + 1)));
+            Map.setMap(x,y,Pojazd.List.add(new Autobus((random.nextInt(2) + 1))));
         else
-            Pojazd.List.add(new Ciezarowka((random.nextInt(2) + 2)));
-
+            Map.setMap(x,y,Pojazd.List.add(new Ciezarowka((random.nextInt(2) + 2))));
     }
     public static double zliczanie(int dldrogi, int v){
         return ((double)dldrogi/(double)v);

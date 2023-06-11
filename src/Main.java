@@ -11,9 +11,11 @@ public class Main {
         Sciezka.dodanieSciezki(skrzyzowanie, sciezki);
         /* Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie); */
+        int czasSwiatel = 60;
         for(int i = 0; i<2;i++) {
             for (int j = 0; j < 6; j++) {
-                Symulacja.generowaniePojazdu();
+                if(Map.getMap(0,0) == null && czasSwiatel > 0)
+                    Symulacja.generowaniePojazdu(0,0);
             }
             Pojazd.clearList();
         }
