@@ -1,6 +1,7 @@
 public class Ciezarowka extends Pojazd {
-    Ciezarowka(int vmax){
-        super(vmax);
+    Ciezarowka(int vmax, int droga[][]){
+        super(vmax, droga);
         setVmax(vmax);
+        setDroga(droga);
     }
 }

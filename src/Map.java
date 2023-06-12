@@ -11,7 +11,7 @@ public class Map{
             return false;
         return true;
     }
-    public static <T> void setMap(int x, int y, T obiekt){
+    public static <P> void setMap(int x, int y, P obiekt){
         if (!istnieje(x, y))
             return;
         mapa[x][y] = (Pojazd)obiekt;
@@ -20,5 +20,25 @@ public class Map{
         if (!istnieje(x, y))
             return null;
         return mapa[x][y];
+    }
+    public static void see(){
+        for(int i = 0; i < wielX; i++){
+            for (int j = 0; j < wielY; j++){
+                if(getMap(i,j)== null)
+                    System.out.print(" O ");
+                else System.out.print(" X ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public static Boolean mapContents(){
+        for(int i = 0; i < wielX; i++){
+            for (int j = 0; j < wielY; j++){
+                if(getMap(i,j)!= null)
+                    return true;
+            }
+        }
+        return false;
     }
 }
