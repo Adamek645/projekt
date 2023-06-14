@@ -25,22 +25,20 @@ public class Map{
             return null;
         return mapa[x][y];
     }
-    public static void see(){
+    public static void mapClear(){
         for(int i = 0; i < wielX; i++){
             for (int j = 0; j < wielY; j++){
-                if(getMap(i,j)== null)
-                    System.out.print(" O ");
-                else System.out.print(" X ");
+                    setMap(i,j,null);
+                }
             }
-            System.out.println("");
         }
-    }
-
     public static Boolean mapContents(){
         for(int i = 0; i < wielX; i++){
             for (int j = 0; j < wielY; j++){
-                if(getMap(i,j)!= null)
+                if(getMap(i,j)!= null) {
+                    System.out.println(getMap(i,j)+"|"+getMap(i,j).C+" || "+getMap(i,j).droga.length);
                     return true;
+                }
             }
         }
         return false;

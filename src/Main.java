@@ -15,7 +15,7 @@ public class Main {
         int czasSwiatel = 600;
         int m,x,y,a = 0,b = 1,time = czasSwiatel,pojazdlimit = 30;
         Random rand = new Random();
-        Map mapa = new Map(600,600);
+        Map mapa = new Map(601,601);
        // for(int cykl = 0; cykl < 3;cykl++) {
             while (czasSwiatel > 0 || Map.mapContents()) {
                 time = time + 1;
@@ -39,21 +39,25 @@ public class Main {
                         }*/
                         }
                 }
-                if(Pojazd.List.size() != 0)
+                if(Pojazd.List.size() != 0) {
                     for (int l = 0; l < Pojazd.List.size(); l++) {
                         m = Pojazd.List.get(l).vmax;
                         while (m > 0) {
-                            if ((Pojazd.List.get(l).C + 1) == Pojazd.List.get(l).droga.length) {
+                            if (((Pojazd.List.get(l).C) + 1) == Pojazd.List.get(l).droga.length) {
                                 mapa.setMap(Pojazd.List.get(l).x, Pojazd.List.get(l).y, null);
                                 m = 0;
-                            } //else if (){}
-
-                                else{
+                            }// else if (){
+                            // m = 0;
+                            //  }
+                            else {
                                 Pojazd.List.get(l).ruchPojazdu();
                             }
                             m--;
                         }
                     }
+                    if(mapa.getMap(Pojazd.List.get(Pojazd.List.size()-1).x, Pojazd.List.get(Pojazd.List.size()-1).y) == null)
+                        mapa.mapClear();
+                }
                 czasSwiatel--;
             }
             System.out.println(Pojazd.List);
