@@ -6,9 +6,11 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         List<Droga> drogi = new ArrayList<>();
         List<Sciezka> sciezki = new ArrayList<>();
-        Skrzyzowanie skrzyzowanie = new Skrzyzowanie(drogi, sciezki);
+        List<PunktKolizji> punktyKolizji = new ArrayList<>();
+        Skrzyzowanie skrzyzowanie = new Skrzyzowanie(drogi, sciezki, punktyKolizji);
         skrzyzowanie.nwm();
         Sciezka.dodanieSciezki(skrzyzowanie, sciezki);
+        PunktKolizji.wyznaczaniePunktow(punktyKolizji, sciezki);
         int[][] sciezka = Skrzyzowanie.getSciezka(0);
         /* Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie); */
