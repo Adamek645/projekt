@@ -27,7 +27,7 @@ public class Skrzyzowanie {
                     if(in.hasNext()) {
                         if (in.nextLine().equals("[droga]")) {
                             List<Slot> slots = new ArrayList<Slot>();
-                            Droga drogs = new Droga(in.nextInt(), in.nextDouble(), in.nextDouble(), in.nextInt(), slots);
+                            Droga drogs = new Droga(in.nextInt(), in.nextInt()*10, in.nextInt()*10, in.nextInt(), slots);
                             Droga.dodanie_slot(in, slots);
                             drogi.add(drogs);
                             System.out.println("Dodano droge nr " + drogi.get(drogi.size() - 1).getId() +
@@ -56,7 +56,7 @@ public class Skrzyzowanie {
             }
         }
     }
-    public double getDrogi (int droga, int pole) {
+    public int getDrogi (int droga, int pole) {
         if (pole == 0) {
             return drogi.get(droga).getId();
         }
@@ -71,7 +71,7 @@ public class Skrzyzowanie {
         }
         return 0;
     }
-    public double getSloty (int droga, int slot, int pole) {
+    public int getSloty (int droga, int slot, int pole) {
         return drogi.get(droga).getSloty(slot, pole);
     }
 }

@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 public class Droga {
     private int id;
-    private double pozx;
-    private double pozy;
+    private int pozx;
+    private int pozy;
     private int rotate;
     private List<Slot> sloty;
-    Droga(int id, double pozx, double pozy, int rotate, List<Slot> sloty) {
+    Droga(int id, int pozx, int pozy, int rotate, List<Slot> sloty) {
         this.id = id;
         this.pozx = pozx;
         this.pozy = pozy;
@@ -35,8 +35,8 @@ public class Droga {
         }
     }
     public int getId() { return id; }
-    public double getPozx() { return pozx; }
-    public double getPozy() { return pozy; }
+    public int getPozx() { return pozx; }
+    public int getPozy() { return pozy; }
     public int getRotate() { return rotate; }
     public int getSloty(int slot, int pole) {
         if (pole == 0) {
