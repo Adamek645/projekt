@@ -12,12 +12,14 @@ public class Sciezka {
     private int drogaWy;
     private int slotWy;
     private int[][] sciezka;
-    Sciezka (int drogaWe, int slotWe, int drogaWy, int slotWy, int[][] sciezka) {
+    private int p;
+    Sciezka (int drogaWe, int slotWe, int drogaWy, int slotWy, int[][] sciezka, int p) {
         this.drogaWe = drogaWe;
         this.slotWe = slotWe;
         this.drogaWy = drogaWy;
         this.slotWy = slotWy;
         this.sciezka = sciezka;
+        this.p = p;
     }
     public int getDrogaWe() {
         return drogaWe;
@@ -32,6 +34,7 @@ public class Sciezka {
         return slotWy;
     }
     public int[][] getSciezka() {return sciezka;}
+    public int getP() {return p;}
     public static int getPoz(Skrzyzowanie skrzyzowanie, int droga, int pole) {
         return skrzyzowanie.getDrogi(droga, pole);
     }
@@ -829,10 +832,12 @@ public class Sciezka {
                     } else poprawnosc = 2;
                 }
                 ArrayList<int[]> listsciezka = new ArrayList<>();
+                System.out.println("Podaj stopień pierwszeństwa ścieżki (0 - najwyższa, kolejne liczby mniejsza)");
+                int p = wejscie.nextInt();
                 obliczanieSciezki(skrzyzowanie, drogaWe, slotWe, drogaWy, slotWy, listsciezka);
                 int[][] tabsciezka = new int[listsciezka.size()][2];
                 listsciezka.toArray(tabsciezka);
-                Sciezka sciezka = new Sciezka(drogaWe, slotWe, drogaWy, slotWy, tabsciezka);
+                Sciezka sciezka = new Sciezka(drogaWe, slotWe, drogaWy, slotWy, tabsciezka,p);
                 sciezki.add(sciezka);
                 wejscie.nextLine();
                 System.out.print("Czy chcesz zobaczyc liste sciezek? (Tak/Nie): ");
