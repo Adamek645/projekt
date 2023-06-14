@@ -80,6 +80,11 @@ public class Sciezka {
                 x = (int)xt;
                 return new int[]{x,y};
             }
+            if (rotWy == 0) {
+                double yt = y0+sqrt(-x*x+2*x*x0-x0*x0+r*r);
+                y = (int)yt;
+                return new int[]{x,y};
+            }
         }
         return new int[]{0,0};
     }
@@ -96,7 +101,7 @@ public class Sciezka {
             y1 = rot(x1,y1,rotWe,moveWe);
         } else if (rotWe == 0 || rotWe == 180) {
             x1 = rot(x1,y1,rotWe,moveWe);
-        };
+        }
         if(rotWy == 90 || rotWy == 270) {
             y2 = rot(x2,y2,rotWy,moveWy);
         } else if (rotWy == 0 || rotWy == 180) {
@@ -314,10 +319,10 @@ public class Sciezka {
                     for (int i = 0; i < sciezki.size(); i++)
                         System.out.println("Sciezka nr " + i + ":\nWejscie: droga " + sciezki.get(i).drogaWe + " slot " + sciezki.get(i).slotWe + "\n" +
                                 "Wyjscie: droga " + sciezki.get(i).drogaWy +  " slot " + sciezki.get(i).slotWy + "\n o dlugosci " +
-                                + sciezki.get(i).sciezka.length);
+                                sciezki.get(i).sciezka.length);
                 }
-                for (int i = 0; i < sciezki.size(); i++) {
-                    System.out.println(Arrays.deepToString(sciezki.get(i).getSciezka()));
+                for (Sciezka value : sciezki) {
+                    System.out.println(Arrays.deepToString(value.getSciezka()));
                 }
             }
         }

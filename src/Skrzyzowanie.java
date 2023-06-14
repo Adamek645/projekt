@@ -71,6 +71,9 @@ public class Skrzyzowanie {
         }
         return 0;
     }
+    public int[][] getSciezka (int sciezka){
+        return sciezki.get(sciezka).getSciezka();
+    }
     public int getSloty (int droga, int slot, int pole) {
         return drogi.get(droga).getSloty(slot, pole);
     }
