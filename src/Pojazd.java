@@ -12,7 +12,7 @@ public class Pojazd {
                 this.vmax = vmax;
                 this.droga = droga;
                 this.x = droga[0][0];
-                this.y = droga[1][0];
+                this.y = droga[0][1];
                 this.C = 0;
         }
         static List<Pojazd> getList() {
@@ -23,15 +23,15 @@ public class Pojazd {
         }
         public void ruchPojazdu(){
                 if(this.kolizjaPojazdu()) {
-                        Map.setMap(this.droga[0][this.C + 1], this.droga[1][this.C + 1], Map.getMap(this.x, this.y));
+                        Map.setMap(this.droga[this.C + 1][0], this.droga[this.C + 1][0], Map.getMap(this.x, this.y));
                         Map.setMap(this.x, this.y, null);
                         this.C++;
-                        this.x = this.droga[0][this.C];
-                        this.y = this.droga[1][this.C];
+                        this.x = this.droga[this.C][0];
+                        this.y = this.droga[this.C][1];
                 }
         }
         public Boolean kolizjaPojazdu(){
-                if(Map.getMap(this.droga[0][this.C + 1],this.droga[1][this.C + 1]) == null)
+                if(Map.getMap(this.droga[this.C + 1][0],this.droga[this.C + 1][1]) == null)
                         return true;
                 return false;
         }
