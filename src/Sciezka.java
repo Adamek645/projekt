@@ -181,7 +181,7 @@ public class Sciezka {
                 }
             }
             if (rotWy == 270) {
-                for(; x < 601; y++) {
+                for(; x < 601; x++) {
                     tab = poz1(x,y);
                     sciezka.add(tab);
                 }
