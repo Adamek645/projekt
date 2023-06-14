@@ -112,7 +112,6 @@ public class Sciezka {
         int x = x1; int y = y1;
         if(rotWe == 90) {
             int[] tab = new int[] {x1, y1};
-            sciezka.add(tab);
             for (; x < 149; x++) {
                     tab = poz1(x,y);
                     sciezka.add(tab);
