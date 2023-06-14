@@ -71,7 +71,7 @@ public class Main {
                                         if (Skrzyzowanie.getPierwszenstwo(Skrzyzowanie.getPierwszenstwo(a)) > Skrzyzowanie.getPierwszenstwo(b)) {
                                             int i = 0, j = 0;
                                             while (i < (Skrzyzowanie.getSciezka(a).length)) {
-                                                if (Skrzyzowanie.getSciezka(b)[i][0] == zmienna x || Skrzyzowanie.getSciezka(b)[i][1] == zminna y){
+                                                if (Skrzyzowanie.getSciezka(b)[i][0] == zmienna.x || Skrzyzowanie.getSciezka(b)[i][1] == zminna.y){
                                                     break;
                                                 }
                                                 i++;
