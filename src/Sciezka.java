@@ -70,6 +70,20 @@ public class Sciezka {
                 y = (int)yt;
                 return new int[]{x,y};
             }
+        } else if(rotWe == 180) {
+            if (rotWy == 90) {
+                double xt = x0+sqrt(-y*y+2*y*y0-y0*y0+r*r);
+                x = (int)xt;
+                return new int[]{x,y};
+            }
+            if (rotWy == 0) {
+                return new int[]{x, y-1};
+            }
+            if (rotWy == 270) {
+                double xt = x0-sqrt(-y*y+2*y*y0-y0*y0+r*r);
+                x = (int)xt;
+                return new int[]{x,y};
+            }
         }
         return new int[]{0,0};
     }
@@ -81,7 +95,19 @@ public class Sciezka {
                 return new int[]{x,y};
             }
             if (rotWy == 0) {
-                double yt = y0+sqrt(-x*x+2*x*x0-x0*x0+r*r);
+                double xt = x0+sqrt(-y*y+2*y*y0-y0*y0+r*r);
+                x = (int)xt;
+                return new int[]{x,y};
+            }
+        }
+        if(rotWe == 180) {
+            if (rotWy == 90) {
+                double yt = y0-sqrt(-x*x+2*x*x0-x0*x0+r*r);
+                y = (int)yt;
+                return new int[]{x,y};
+            }
+            if (rotWy == 270) {
+                double yt = y0-sqrt(-x*x+2*x*x0-x0*x0+r*r);
                 y = (int)yt;
                 return new int[]{x,y};
             }
@@ -108,17 +134,16 @@ public class Sciezka {
             x2 = rot(x2,y2,rotWy,moveWy);
         }
         System.out.println(x1 + " " + y1 + " " + x2 + " " + y2 + " " + rotWe + " " + rotWy);
-        System.out.println("obliczanie 1 czesci sciezki");
         int x = x1; int y = y1;
+        int[] tab = new int[] {x1, y1};
         if(rotWe == 90) {
-            int[] tab = new int[] {x1, y1};
             for (; x < 149; x++) {
                     tab = poz1(x,y);
                     sciezka.add(tab);
             }
             if (rotWy == 180) {
                 if (450-y1>x2-150) {
-                    int r = x2-150; int x0 = 150; int y0 = 450-abs(450-y1-x2+150);
+                    int r = x2-150; int x0 = 150; int y0 = y1-r;
                     double r2 = r*0.707;
                     int r3 = (int)r2;
                     for (; tab[0] < x0+r3; x++) {
@@ -190,8 +215,211 @@ public class Sciezka {
                     sciezka.add(tab);
                 }
             }
+            if (rotWy == 0) {
+                if (y1-150>x2-150) {
+                    int r = x2-150; int x0 = 150; int y0 = y1-r;
+                    double r2 = r*0.707;
+                    int r3 = (int)r2;
+                    for (; tab[0] < x0+r3; x++) {
+                        tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                        y = tab[1];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                    x++;
+                    y--;
+                    for (; y >= y0; y--) {
+                        tab = poz22(x,y,rotWe, rotWy, x0,y0,r);
+                        x = tab[0];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                }
+                if (y1-150 == x2-150) {
+                    int r = x2-150; int x0 = 150; int y0 = 150;
+                    double r2 = r*0.707;
+                    int r3 = (int)r2;
+                    for (; tab[0] < x0+r3; x++) {
+                        tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                        y = tab[1];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                    x++;
+                    y--;
+                    for (; y >= y0; y--) {
+                        tab = poz22(x,y,rotWe, rotWy, x0,y0,r);
+                        x = tab[0];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                }
+                for(; y >= 0; y--) {
+                    tab = poz1(x,y);
+                    sciezka.add(tab);
+                }
+            }
+        } else if (rotWe == 180) {
+            for (; y > 450; y--) {
+                tab = poz1(x,y);
+                sciezka.add(tab);
+                System.out.println(y);
+            }
+            if (rotWy == 270) {
+                if (450 - y1 > 450 - x2) {
+                    int r = 450 - y2;
+                    int x0 = x1 + r;
+                    int y0 = 450;
+                    double r2 = r * 0.707;
+                    int r3 = (int) r2;
+                    for (; tab[1] > y0 - r3; y--) {
+                        tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                        x = tab[0];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                    x++;
+                    y--;
+                    for (; x <= x0; x++) {
+                        tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                        y = tab[1];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                }
+                if (450 - y1 == 450 - x2) {
+                    int r = x2 - (x1 + 150);
+                    int x0 = 450;
+                    int y0 = 450;
+                    double r2 = r * 0.707;
+                    int r3 = (int) r2;
+                    for (; tab[1] < y0 - r3; y--) {
+                        tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                        x = tab[0];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                    x++;
+                    y--;
+                    for (; x <= x0; x++) {
+                        tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                        y = tab[1];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                }
+                if (450 - y1 < 450 - x2) {
+                    int r = x2 - (x1 + 150);
+                    int x0 = 450;
+                    int y0 = y1 - (y2 + 150);
+                    double r2 = r * 0.707;
+                    int r3 = (int) r2;
+                    for (; y > y0; y--) {
+                        tab = poz1(x, y);
+                        sciezka.add(tab);
+                    }
+                    System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                    for (; tab[1] > y0 - r3; y--) {
+                        tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                        x = tab[0];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                    x++;
+                    y--;
+                    for (; x <= x0; x++) {
+                        tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                        y = tab[1];
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        sciezka.add(tab);
+                    }
+                }
+                for (; x < 601; x++) {
+                    tab = poz1(x, y);
+                    sciezka.add(tab);
+                }
+            } else if (rotWy == 90) {
+                    if (x1 - 150 > 450 - y2) {
+                        int r = 450-y2;
+                        int x0 = x1-r;
+                        int y0 = 450;
+                        double r2 = r * 0.707;
+                        int r3 = (int) r2;
+                        for (; tab[1] > y0 - r3; y--) {
+                            tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                            x = tab[0];
+                            System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                        x--;
+                        y--;
+                        for (; x >= x0; x--) {
+                            tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                            y = tab[1];
+                            System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                    }
+                    if (x1 - 150 == 450 - y2) {
+                        int r = x1 - 150;
+                        int x0 = 150;
+                        int y0 = 450;
+                        double r2 = r * 0.707;
+                        int r3 = (int) r2;
+                        for (; tab[1] > y0 - r3; y--) {
+                            tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                            x = tab[0];
+                            System.out.println("2 | " + tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                        x--;
+                        y--;
+                        for (; x >= x0; x--) {
+                            tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                            y = tab[1];
+                            System.out.println("2b | " + tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                    }
+                    if (x1 - 150 < 450 - y2) {
+                        int r = x1 - 150;
+                        int x0 = 150;
+                        int y0 = y2 + r;
+                        double r2 = r * 0.707;
+                        int r3 = (int) r2;
+                        for (; y > y0; y--) {
+                            tab = poz1(x, y);
+                            sciezka.add(tab);
+                        }
+                        System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                        for (; tab[1] > y0 - r3; y--) {
+                            tab = poz21(x, y, rotWe, rotWy, x0, y0, r);
+                            x = tab[0];
+                            System.out.println("3a | " + tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                        x--;
+                        y--;
+                        for (; x >= x0; x--) {
+                            tab = poz22(x, y, rotWe, rotWy, x0, y0, r);
+                            y = tab[1];
+                            System.out.println(tab[0] + " " + tab[1] + " | " + x + " " + y);
+                            sciezka.add(tab);
+                        }
+                    }
+                    for (; x >= 0; x--) {
+                        tab = poz1(x, y);
+                        sciezka.add(tab);
+                    }
+                }
+                if (rotWy == 0) {
+                    for(; y >= 0; y--) {
+                        tab = poz1(x,y);
+                        sciezka.add(tab);
+                    }
+                }
+            }
         }
-    }
     /* public static double dlugoscSciezki(Skrzyzowanie skrzyzowanie, int drogaWe, int slotWe, int drogaWy, int slotWy) { // nie uwzględniamy przypadku, gdy x i y są na różnych wyskościach, ale w tą samą stronę
         double rotWe = getPoz(skrzyzowanie, drogaWe, 3);
         double rotWy = getPoz(skrzyzowanie, drogaWy, 3);
