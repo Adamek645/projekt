@@ -1,19 +1,23 @@
+import org.w3c.dom.ls.LSOutput;
+
 public class Map{
     private static Pojazd[][] mapa;
     private static int wielX, wielY;
     Map(int wielX, int wielY){
-        mapa = new Pojazd[wielX][wielY];
+        mapa = new Pojazd[wielX+1][wielY+1];
         Map.wielX = wielX;
         Map.wielY = wielY;
     }
     public static Boolean istnieje(int x, int y){
-        if ((x < 0) || (x >= wielX) || (y < 0) || (y >= wielY))
+        if ((x < 0) || (x > wielX) || (y < 0) || (y > wielY)) {
             return false;
+        }
         return true;
     }
     public static <P> void setMap(int x, int y, P obiekt){
-        if (!istnieje(x, y))
+        if (!istnieje(x, y)) {
             return;
+        }
         mapa[x][y] = (Pojazd)obiekt;
     }
     public static Pojazd getMap(int x, int y){
@@ -21,22 +25,20 @@ public class Map{
             return null;
         return mapa[x][y];
     }
-    public static void see(){
+    public static void mapClear(){
         for(int i = 0; i < wielX; i++){
             for (int j = 0; j < wielY; j++){
-                if(getMap(i,j)== null)
-                    System.out.print(" O ");
-                else System.out.print(" X ");
+                    setMap(i,j,null);
+                }
             }
-            System.out.println("");
         }
-    }
-
     public static Boolean mapContents(){
         for(int i = 0; i < wielX; i++){
             for (int j = 0; j < wielY; j++){
-                if(getMap(i,j)!= null)
+                if(getMap(i,j)!= null) {
+                    System.out.println(getMap(i,j)+"|"+getMap(i,j).C+" || "+getMap(i,j).droga.length);
                     return true;
+                }
             }
         }
         return false;
