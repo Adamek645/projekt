@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 public class Main {
@@ -39,8 +40,6 @@ public class Main {
                                     }
                              }
                         }
-                        }
-
                 }
                 if(Pojazd.List.size() != 0) {
                     for (int l = 0; l < Pojazd.List.size(); l++) {
@@ -49,61 +48,63 @@ public class Main {
                             if (((Pojazd.List.get(l).C) + 1) == Pojazd.List.get(l).droga.length) {
                                 mapa.setMap(Pojazd.List.get(l).x, Pojazd.List.get(l).y, null);
                                 m = 0;
-                            } else if(Pojazd.List.get(l).droga.equals(Skrzyzowanie.getSciezka(a))){
-                                    if(Skrzyzowanie.getPierwszenstwo(Skrzyzowanie.getPierwszenstwo(b)) > Skrzyzowanie.getPierwszenstwo(a)){
-                                        int i = 0,j = 0;
-                                        while(i < (Skrzyzowanie.getSciezka(a).length)){
-                                            if(Skrzyzowanie.getSciezka(a)[i][0] == zmienna x || Skrzyzowanie.getSciezka(a)[i][1] == zminna y){
+                            } else if (Arrays.deepEquals(Pojazd.List.get(l).droga, Skrzyzowanie.getSciezka(a))) {
+                                if (Skrzyzowanie.getPierwszenstwo(Skrzyzowanie.getPierwszenstwo(b)) > Skrzyzowanie.getPierwszenstwo(a)) {
+                                    int i = 0, j = 0, xk = punktyKolizji.get(a).getPozx(), yk = punktyKolizji.get(a).getPozy();
+                                    while (i < (Skrzyzowanie.getSciezka(a).length)) {
+                                        if (Skrzyzowanie.getSciezka(a)[i][0] == xk || Skrzyzowanie.getSciezka(a)[i][1] == yk) {
+                                            break;
+                                        }
+                                        i++;
+                                    }
+                                    j = i - zasieg;
+                                    while (j < i) {
+                                        if (mapa.getMap(Skrzyzowanie.getSciezka(a)[j][0], Skrzyzowanie.getSciezka(a)[j][1]) == Pojazd.List.get(l)) {
+                                            j = i + zasieg;
+                                            while (i <= j && mapa.getMap(Skrzyzowanie.getSciezka(a)[j][0], Skrzyzowanie.getSciezka(a)[j][1]) == null)
+                                                i++;
+                                            if (j == i) {
+                                                Pojazd.List.get(l).ruchPojazdu();
+                                            }
+                                            break;
+                                        }
+                                        j++;
+                                    }
+                                } else if (Arrays.deepEquals(Pojazd.List.get(l).droga, Skrzyzowanie.getSciezka(b))) {
+                                    if (Skrzyzowanie.getPierwszenstwo(Skrzyzowanie.getPierwszenstwo(a)) > Skrzyzowanie.getPierwszenstwo(b)) {
+                                        int i = 0, j = 0, xk = punktyKolizji.get(b).getPozx(), yk = punktyKolizji.get(b).getPozy();
+                                        while (i < (Skrzyzowanie.getSciezka(a).length)) {
+                                            if (Skrzyzowanie.getSciezka(b)[i][0] == xk || Skrzyzowanie.getSciezka(b)[i][1] == yk) {
                                                 break;
                                             }
                                             i++;
                                         }
-                                        j = i-zasieg;
-                                        while(j<i){
-                                            if(mapa.getMap(Skrzyzowanie.getSciezka(a)[j][0],Skrzyzowanie.getSciezka(a)[j][1]) == Pojazd.List.get(l)){
+                                        j = i - zasieg;
+                                        while (j < i) {
+                                            if (mapa.getMap(Skrzyzowanie.getSciezka(b)[j][0], Skrzyzowanie.getSciezka(b)[j][1]) == Pojazd.List.get(l)) {
                                                 j = i + zasieg;
-                                                while(i<=j && mapa.getMap(Skrzyzowanie.getSciezka(a)[j][0],Skrzyzowanie.getSciezka(a)[j][1]) == null)
+                                                while (i <= j && mapa.getMap(Skrzyzowanie.getSciezka(b)[j][0], Skrzyzowanie.getSciezka(b)[j][1]) == null)
                                                     i++;
-                                                if(j == i){Pojazd.List.get(l).ruchPojazdu();}
+                                                if (j == i) {
+                                                    Pojazd.List.get(l).ruchPojazdu();
+                                                }
                                                 break;
                                             }
                                             j++;
                                         }
-                                    }else if(Pojazd.List.get(l).droga.equals(Skrzyzowanie.getSciezka(b))) {
-                                        if (Skrzyzowanie.getPierwszenstwo(Skrzyzowanie.getPierwszenstwo(a)) > Skrzyzowanie.getPierwszenstwo(b)) {
-                                            int i = 0, j = 0;
-                                            while (i < (Skrzyzowanie.getSciezka(a).length)) {
-                                                if (Skrzyzowanie.getSciezka(b)[i][0] == zmienna.x || Skrzyzowanie.getSciezka(b)[i][1] == zminna.y){
-                                                    break;
-                                                }
-                                                i++;
-                                            }
-                                            j = i - zasieg;
-                                            while (j < i) {
-                                                if (mapa.getMap(Skrzyzowanie.getSciezka(b)[j][0], Skrzyzowanie.getSciezka(b)[j][1]) == Pojazd.List.get(l)) {
-                                                    j = i + zasieg;
-                                                    while (i <= j && mapa.getMap(Skrzyzowanie.getSciezka(b)[j][0], Skrzyzowanie.getSciezka(b)[j][1]) == null)
-                                                        i++;
-                                                    if (j == i) {
-                                                        Pojazd.List.get(l).ruchPojazdu();
-                                                    }
-                                                    break;
-                                                }
-                                                j++;
-                                            }
-                                        }
                                     }
-                            else {
-                                Pojazd.List.get(l).ruchPojazdu();
+                                } else {
+                                    Pojazd.List.get(l).ruchPojazdu();
+                                }
+                                m--;
                             }
-                            m--;
                         }
+                        if (mapa.getMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y) == null)
+                            mapa.mapClear();
                     }
-                    if(mapa.getMap(Pojazd.List.get(Pojazd.List.size()-1).x, Pojazd.List.get(Pojazd.List.size()-1).y) == null)
-                        mapa.mapClear();
                 }
-                czasSwiatel--;
-            }
+                    czasSwiatel--;
+                }
             System.out.println(Pojazd.List);
             Pojazd.clearList();
             System.out.println(Symulacja.sumaPkt);
