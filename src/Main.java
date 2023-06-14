@@ -19,29 +19,28 @@ public class Main {
         int m,x,y,a = 0,b = 1,time = czasSwiatel,pojazdlimit = 30, zasieg = 100;
         Random rand = new Random();
         Map mapa = new Map(601,601);
-       // for(int cykl = 0; cykl < 3;cykl++) {
+        for(int cykl = 0; cykl < 3;cykl++) {
             while (czasSwiatel > 0 || Map.mapContents()) {
                 time = time + 1;
                 if (rand.nextInt(100) < 40 && pojazdlimit > 0) {
                     pojazdlimit--;
-                        if (rand.nextInt(2) == 1) {
-                            x = Skrzyzowanie.getSciezka(a)[0][0];
-                            y = Skrzyzowanie.getSciezka(a)[0][1];
-                            if (mapa.getMap(x, y) == null && czasSwiatel > 0){
-                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a));
+                    if (rand.nextInt(2) == 1) {
+                        x = Skrzyzowanie.getSciezka(a)[0][0];
+                        y = Skrzyzowanie.getSciezka(a)[0][1];
+                        if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
+                            Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a));
+                            mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
+                        } else {
+                            x = Skrzyzowanie.getSciezka(b)[0][0];
+                            y = Skrzyzowanie.getSciezka(b)[0][1];
+                            if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
+                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b));
                                 mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
                             }
-                           else {
-                                x = Skrzyzowanie.getSciezka(b)[0][0];
-                                y = Skrzyzowanie.getSciezka(b)[0][1];
-                                    if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
-                                        Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b));
-                                        mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
-                                    }
-                             }
                         }
+                    }
                 }
-                if(Pojazd.List.size() != 0) {
+                if (Pojazd.List.size() != 0) {
                     for (int l = 0; l < Pojazd.List.size(); l++) {
                         m = Pojazd.List.get(l).vmax;
                         while (m > 0) {
@@ -103,15 +102,16 @@ public class Main {
                             mapa.mapClear();
                     }
                 }
-                    czasSwiatel--;
-                }
-            System.out.println(Pojazd.List);
+                czasSwiatel--;
+            }
+            System.out.println("Lista pojazdów: " + Pojazd.List);
             Pojazd.clearList();
-            System.out.println(Symulacja.sumaPkt);
-            System.out.println(Symulacja.count);
-            System.out.println((float) Symulacja.count / time);
-            System.out.println(Symulacja.zliczanie(Symulacja.sumaV, time));
-            a=+2;
-            b=+2;
+            System.out.println("Suma Punktów: " + Symulacja.sumaPkt);
+            System.out.println("Ilość pojazdów w symulacji: " + Symulacja.count);
+            System.out.println("Średnia prędkość: " + (double) Symulacja.sumaV / Symulacja.count);
+            System.out.println("Czas symulacji " + time);
+            a = +2;
+            b = +2;
         }
     }
+}

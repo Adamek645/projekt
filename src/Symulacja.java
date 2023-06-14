@@ -34,11 +34,5 @@ public class Symulacja {
         sumaV = sumaV + Pojazd.List.get(Pojazd.List.size()-1).vmax;
         return Pojazd.List.get(Pojazd.List.size()-1);
     }
-    public static double zliczanie(int sumav, int time){
-        sumaV = 0;
-        count = 0;
-        sumaPkt = 0;
-        return ((double)sumav/(double)time);
-    }
     public static void kontrolaKolizji(){}
 }
