@@ -784,7 +784,7 @@ public class Sciezka {
                 }
             }
             if (rotWy == 0) {
-                for(; y >= 0; y--) {
+                for(; y < 601; y++) {
                     tab = poz1(x,y);
                     sciezka.add(tab);
                 }

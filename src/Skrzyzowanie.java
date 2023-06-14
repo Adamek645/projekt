@@ -7,9 +7,11 @@ import java.util.Scanner;
 public class Skrzyzowanie {
     private List<Droga> drogi;
     private static List<Sciezka> sciezki;
-    Skrzyzowanie(List<Droga> drogi, List<Sciezka> sciezki) {
+    private static List<PunktKolizji> punktyKolizji;
+    Skrzyzowanie(List<Droga> drogi, List<Sciezka> sciezki, List<PunktKolizji> punktyKolizji) {
         this.drogi = drogi;
         this.sciezki = sciezki;
+        this.punktyKolizji = punktyKolizji;
     }
     public void nwm() throws FileNotFoundException { // wczytanie pliku
         File skrzyz = new File("skrzyzowanie.txt");
