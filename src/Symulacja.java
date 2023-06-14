@@ -15,19 +15,19 @@ public class Symulacja {
     public static void symulacja(Skrzyzowanie skrzyzowanie){
     }
 
-    public static Pojazd generowaniePojazdu(int scierzka[][]){
+    public static Pojazd generowaniePojazdu(int sciezka[][]){
         Random random = new Random();
         int los = random.nextInt(10);
         if(los < 4) {
-            Pojazd.List.add(new Samochod((random.nextInt(2) + 3), scierzka));
+            Pojazd.List.add(new Samochod((random.nextInt(2) + 3), sciezka));
             sumaPkt = sumaPkt + 1;
         }
         else if(los < 6) {
-            Pojazd.List.add(new Autobus((random.nextInt(2) + 1), scierzka));
+            Pojazd.List.add(new Autobus((random.nextInt(2) + 1), sciezka));
             sumaPkt = sumaPkt + 2;
         }
         else {
-            Pojazd.List.add(new Ciezarowka((random.nextInt(2) + 2), scierzka));
+            Pojazd.List.add(new Ciezarowka((random.nextInt(2) + 2), sciezka));
             sumaPkt = sumaPkt + 1.6;
         }
         count = count + 1;
