@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Skrzyzowanie {
     private List<Droga> drogi;
-    private List<Sciezka> sciezki;
+    private static List<Sciezka> sciezki;
     Skrzyzowanie(List<Droga> drogi, List<Sciezka> sciezki) {
         this.drogi = drogi;
         this.sciezki = sciezki;
@@ -71,7 +71,7 @@ public class Skrzyzowanie {
         }
         return 0;
     }
-    public int[][] getSciezka (int sciezka){
+    public static int[][] getSciezka(int sciezka){
         return sciezki.get(sciezka).getSciezka();
     }
     public int getSloty (int droga, int slot, int pole) {

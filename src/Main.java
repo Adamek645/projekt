@@ -9,6 +9,7 @@ public class Main {
         Skrzyzowanie skrzyzowanie = new Skrzyzowanie(drogi, sciezki);
         skrzyzowanie.nwm();
         Sciezka.dodanieSciezki(skrzyzowanie, sciezki);
+        int[][] sciezka = Skrzyzowanie.getSciezka(1);
         /* Symulacja symulacja = new Symulacja();
         Symulacja.symulacja(skrzyzowanie); */
         int czasSwiatel = 10;
