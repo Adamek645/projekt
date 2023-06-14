@@ -25,7 +25,8 @@ public class PunktKolizji {
                             int w2y = sciezki.get(j).getSciezka()[l][1];
                             if(w1x == w2x && w1y == w2y) {
                                 for(int o = 0; o < punktyKolizji.size(); o++) {
-                                    if (punktyKolizji.get(o).sciezka1 == i && punktyKolizji.get(o).sciezka2 == j) {
+                                    if (punktyKolizji.get(o).sciezka1 == i && punktyKolizji.get(o).sciezka2 == j || punktyKolizji.get(o).sciezka1 == j && punktyKolizji.get(o).sciezka2 == i ||
+                                    punktyKolizji.get(o).pozx == w1x && punktyKolizji.get(o).pozy == w1y) {
                                         break;
                                     } else {
                                         PunktKolizji pkt = new PunktKolizji(i, j, w1x, w1y);
@@ -44,5 +45,21 @@ public class PunktKolizji {
                 }
             }
         }
+    }
+
+    public int getPozx() {
+        return pozx;
+    }
+
+    public int getPozy() {
+        return pozy;
+    }
+
+    public int getSciezka1() {
+        return sciezka1;
+    }
+
+    public int getSciezka2() {
+        return sciezka2;
     }
 }
