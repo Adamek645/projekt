@@ -36,7 +36,6 @@ public class Map{
         for(int i = 0; i < wielX; i++){
             for (int j = 0; j < wielY; j++){
                 if(getMap(i,j)!= null) {
-                    System.out.println(getMap(i,j)+"|"+getMap(i,j).C+" || "+getMap(i,j).droga.length);
                     return true;
                 }
             }

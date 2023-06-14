@@ -15,9 +15,6 @@ public class Pojazd {
                 this.y = droga[0][1];
                 this.C = 0;
         }
-        static List<Pojazd> getList() {
-                return List;
-        }
         public static void clearList(){
                 List.clear();
         }
