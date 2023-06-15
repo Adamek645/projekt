@@ -25,11 +25,24 @@ public class PunktKolizji {
                                 int w2x = sciezki.get(j).getSciezka()[l][0];
                                 int w2y = sciezki.get(j).getSciezka()[l][1];
                                 if (w1x == w2x && w1y == w2y) {
+                                    for (int o = 0; o < punktyKolizji.size(); o++) {
+                                        test = 0;
+                                        int p1k = punktyKolizji.get(o).getSciezka1();
+                                        int p2k = punktyKolizji.get(o).getSciezka2();
+                                        int px = punktyKolizji.get(o).getPozx();
+                                        int py = punktyKolizji.get(o).getPozy();
+                                        if ((((p1k == i && p2k == j) || (p1k == j && p2k == i)) ||
+                                                (px == w1x && py == w1y))) {
+                                            break;
+                                        }
+                                        test = 1;
+                                    }
+                                    if (test == 1) {
                                     PunktKolizji pkt = new PunktKolizji(i, j, w1x, w1y);
                                     punktyKolizji.add(pkt);
                                     System.out.println("Stworzono punkt kolizji o koordynatach: x: " + sciezki.get(i).getSciezka()[k][0] + " y: " + sciezki.get(i).getSciezka()[k][1]);
-                                    test = 1;
                                     break;
+                                    }
                                 }
                             }
                             if (test == 1)
