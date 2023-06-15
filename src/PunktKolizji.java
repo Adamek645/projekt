@@ -50,15 +50,12 @@ public class PunktKolizji {
     public int getPozx() {
         return pozx;
     }
-
     public int getPozy() {
         return pozy;
     }
-
     public int getSciezka1() {
         return sciezka1;
     }
-
     public int getSciezka2() {
         return sciezka2;
     }
