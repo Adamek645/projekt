@@ -30,19 +30,20 @@ public class Main {
             int czasSwiatel = czasSwiatelSt;
              while (czasSwiatel > 0 || Map.mapContents()) {
                 time = time + 1;
-                if (rand.nextInt(100) < 30 && pojazdlimit > 0 && czasSwiatel > 80 && (time-pop)*12>=pojPop) {
+                double wspolczynnik = (double) (czasSwiatelSt - czasSwiatel) /(czasSwiatelSt);
+                if (rand.nextInt(100) < 30 && pojazdlimit > 0 && czasSwiatel > 80 && (time-pop)*(int)(7*(0.5+wspolczynnik*0.5))>=pojPop) {
                     pojazdlimit--;
                     if (rand.nextInt(2) == 1) {
                         x = Skrzyzowanie.getSciezka(a)[0][0];
                         y = Skrzyzowanie.getSciezka(a)[0][1];
                         if (mapa.getMap(x, y) == null) {
-                            Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a));
+                            Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a), wspolczynnik);
                             pop = time;
-                            if(Pojazd.List.get(Pojazd.List.size()-1).vmax == 12) {
+                            if(Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(7*(0.5+wspolczynnik*0.5))) {
                                 pojPop = 230;
-                            } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == 13) {
+                            } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(8*(0.5+wspolczynnik*0.5))) {
                                 pojPop = 170;
-                            } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == 14) {
+                            } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(10*(0.7+wspolczynnik*0.3))) {
                                 pojPop = 110;
                             }
                             mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
@@ -50,7 +51,15 @@ public class Main {
                             x = Skrzyzowanie.getSciezka(b)[0][0];
                             y = Skrzyzowanie.getSciezka(b)[0][1];
                             if (mapa.getMap(x, y) == null) {
-                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b));
+                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b), wspolczynnik);
+                                pop = time;
+                                if(Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(7*(0.5+wspolczynnik*0.5))) {
+                                    pojPop = 230;
+                                } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(8*(0.5+wspolczynnik*0.5))) {
+                                    pojPop = 170;
+                                } else if (Pojazd.List.get(Pojazd.List.size()-1).vmax == (int)(10*(0.7+wspolczynnik*0.3))) {
+                                    pojPop = 110;
+                                }
                                 mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
                             }
                         }
@@ -105,7 +114,7 @@ public class Main {
             a = 0;
             b = 1;
         }
-        System.out.println("Wartość przepustowości E/h: " + sumaPkt/100);
+        System.out.println("Przepustowość skrzyżowania E/h: " + sumaPkt/100);
         System.out.println("Liczba pojazdów w ciagu godziny: " + count + "\n");
         System.out.println("Minimalna przepustowość (E/cykl) w badaniu: " + (double)sumaPktMin/100);
         System.out.println("Maksymalna przepustowość (E/cykl) w badaniu: " + (double)sumaPktMax/100);
