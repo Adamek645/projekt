@@ -1,10 +1,17 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 public class Main {
+
     public static void main(String[] args) throws FileNotFoundException {
+        try {
+            ZapisPliku save = new ZapisPliku();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         List<Droga> drogi = new ArrayList<>();
         List<Sciezka> sciezki = new ArrayList<>();
         List<PunktKolizji> punktyKolizji = new ArrayList<>();
@@ -19,29 +26,30 @@ public class Main {
         int m,x,y,a = 0,b = 1,time = czasSwiatel,pojazdlimit = 30, zasieg = 100;
         Random rand = new Random();
         Map mapa = new Map(601,601);
-       // for(int cykl = 0; cykl < 3;cykl++) {
+        for(int iteracja = 0; iteracja < 4; iteracja++){
+        for(int cykl = 0; cykl < 3;cykl++) {
+            czasSwiatel = 1200;
             while (czasSwiatel > 0 || Map.mapContents()) {
                 time = time + 1;
-                if (rand.nextInt(100) < 40 && pojazdlimit > 0) {
+                if (rand.nextInt(100) < 40 && pojazdlimit > 0 && czasSwiatel > 0) {
                     pojazdlimit--;
-                        if (rand.nextInt(2) == 1) {
-                            x = Skrzyzowanie.getSciezka(a)[0][0];
-                            y = Skrzyzowanie.getSciezka(a)[0][1];
-                            if (mapa.getMap(x, y) == null && czasSwiatel > 0){
-                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a));
+                    if (rand.nextInt(2) == 1) {
+                        x = Skrzyzowanie.getSciezka(a)[0][0];
+                        y = Skrzyzowanie.getSciezka(a)[0][1];
+                        if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
+                            Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(a));
+                            mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
+                        } else {
+                            x = Skrzyzowanie.getSciezka(b)[0][0];
+                            y = Skrzyzowanie.getSciezka(b)[0][1];
+                            if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
+                                Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b));
                                 mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
                             }
-                           else {
-                                x = Skrzyzowanie.getSciezka(b)[0][0];
-                                y = Skrzyzowanie.getSciezka(b)[0][1];
-                                    if (mapa.getMap(x, y) == null && czasSwiatel > 0) {
-                                        Symulacja.generowaniePojazdu(Skrzyzowanie.getSciezka(b));
-                                        mapa.setMap(Pojazd.List.get(Pojazd.List.size() - 1).x, Pojazd.List.get(Pojazd.List.size() - 1).y, Pojazd.List.get(Pojazd.List.size() - 1));
-                                    }
-                             }
                         }
+                    }
                 }
-                if(Pojazd.List.size() != 0) {
+                if (Pojazd.List.size() != 0) {
                     for (int l = 0; l < Pojazd.List.size(); l++) {
                         m = Pojazd.List.get(l).vmax;
                         while (m > 0) {
@@ -103,15 +111,23 @@ public class Main {
                             mapa.mapClear();
                     }
                 }
-                    czasSwiatel--;
-                }
-            System.out.println(Pojazd.List);
+                czasSwiatel--;
+            }
             Pojazd.clearList();
-            System.out.println(Symulacja.sumaPkt);
-            System.out.println(Symulacja.count);
-            System.out.println((float) Symulacja.count / time);
-            System.out.println(Symulacja.zliczanie(Symulacja.sumaV, time));
-            a=+2;
-            b=+2;
+            a += 2;
+            b += 2;
+        }
+            System.out.println("Suma Punktów: " + Symulacja.sumaPkt);
+            System.out.println("Ilość pojazdów w symulacji: " + Symulacja.count);
+            System.out.println("Średnia prędkość: " + (double) Symulacja.sumaV / Symulacja.count);
+            System.out.println("Czas symulacji: " + time);
+            ZapisPliku.zapis(Symulacja.count,Symulacja.sumaPkt,time);
+            Symulacja.sumaPkt = 0;
+            Symulacja.count = 0;
+            Symulacja.sumaV = 0;
+            time = 0;
+            a = 0;
+            b = 1;
         }
     }
+}

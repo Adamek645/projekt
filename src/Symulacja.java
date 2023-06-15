@@ -4,14 +4,6 @@ import java.util.Random;
 public class Symulacja {
     static double sumaPkt = 0;
     static int sumaV = 0, count = 0;
-  /*  static ZapisPliku save;
-     static {
-        try {
-            save = new ZapisPliku();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     public static void symulacja(Skrzyzowanie skrzyzowanie){
     }
 
@@ -33,12 +25,6 @@ public class Symulacja {
         count = count + 1;
         sumaV = sumaV + Pojazd.List.get(Pojazd.List.size()-1).vmax;
         return Pojazd.List.get(Pojazd.List.size()-1);
-    }
-    public static double zliczanie(int sumav, int time){
-        sumaV = 0;
-        count = 0;
-        sumaPkt = 0;
-        return ((double)sumav/(double)time);
     }
     public static void kontrolaKolizji(){}
 }
