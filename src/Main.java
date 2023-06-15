@@ -126,6 +126,8 @@ public class Main {
             Symulacja.count = 0;
             Symulacja.sumaV = 0;
             time = 0;
+            a = 0;
+            b = 1;
         }
     }
 }
