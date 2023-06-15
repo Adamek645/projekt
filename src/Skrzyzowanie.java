@@ -23,7 +23,6 @@ public class Skrzyzowanie {
     }
     public void dodanie_drog(Scanner in) {
         if(in.nextLine().equals("[skrzyzowanie]")){
-            {
                 in.nextLine();
                 for (int left = 0; left == 0; ) {
                     if(in.hasNext()) {
@@ -55,7 +54,6 @@ public class Skrzyzowanie {
                         break;
                     }
                 }
-            }
         }
     }
     public int getDrogi (int droga, int pole) {

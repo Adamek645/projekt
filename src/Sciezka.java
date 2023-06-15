@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -791,67 +793,53 @@ public class Sciezka {
             }
         }
     }
-    public static void dodanieSciezki(Skrzyzowanie skrzyzowanie, List<Sciezka> sciezki) {
+    public static void dodanieSciezki(Skrzyzowanie skrzyzowanie, List<Sciezka> sciezki) throws FileNotFoundException {
         Scanner wejscie = new Scanner(System.in);
-        int exit = 0;
         int drogaWe = 0;
         int slotWe = 0;
         int drogaWy = 0;
         int slotWy = 0;
-        while (exit == 0) {
-            System.out.print("Czy chcesz dodac sciezke? (Tak/Nie): ");
-            String test = wejscie.nextLine();
-            if (test.equals("Nie")) {
-                exit = 1;
-            } else {
-                int poprawnosc = 0;
-                while (poprawnosc == 0) {
-                    System.out.print("Podaj numer drogi wejsciowej: ");
-                    drogaWe = wejscie.nextInt();
-                    System.out.print("Podaj numer slotu: ");
-                    slotWe = wejscie.nextInt();
-                    if (getSlot(skrzyzowanie, drogaWe, slotWe, 2) == 2) {
-                        System.out.println("Niepoprawne wejscie - slot jest przeznaczony dla wyjazdu");
-                    } else poprawnosc = 1;
-                }
-                while (poprawnosc == 1) {
-                    System.out.print("Podaj numer drogi wyjsciowej: ");
-                    int popdr = 0;
-                    while (popdr == 0) {
-                        drogaWy = wejscie.nextInt();
-                        if (drogaWe != drogaWy) {
-                            popdr = 1;
-                        } else {
-                            System.out.print("Podaj numer drogi wyjsciowej (nie moze byc taki sam jak wejsciowej): ");
-                        }
+        int p = 0;
+        File plikSciezka = new File("sciezki.txt");
+        Scanner in = new Scanner(plikSciezka);
+        if(in.nextLine().equals("[sciezki]")){
+            in.nextLine();
+            for (int left = 0; left == 0; ) {
+                if (in.hasNext()) {
+                    if (in.nextLine().equals("[sciezka]")) {
+                        drogaWe = in.nextInt();
+                        slotWe = in.nextInt();
+                        drogaWy = in.nextInt();
+                        slotWy = in.nextInt();
+                        p = in.nextInt();
+                        ArrayList<int[]> listsciezka = new ArrayList<>();
+                        obliczanieSciezki(skrzyzowanie, drogaWe, slotWe, drogaWy, slotWy, listsciezka);
+                        int[][] tabsciezka = new int[listsciezka.size()][2];
+                        listsciezka.toArray(tabsciezka);
+                        Sciezka sciezka = new Sciezka(drogaWe, slotWe, drogaWy, slotWy, tabsciezka, p);
+                        sciezki.add(sciezka);
+                        if(in.hasNext())
+                            in.nextLine();
+                        if(in.hasNext())
+                            in.nextLine();
+                    } else {
+                        System.out.println(in.nextLine());
+                        left++;
+                        System.out.println("tak");
                     }
-                    System.out.print("Podaj numer slotu: ");
-                    slotWy = wejscie.nextInt();
-                    if (getSlot(skrzyzowanie, drogaWy, slotWy, 2) == 1) {
-                        System.out.println("Niepoprawne wejscie - slot jest przeznaczony dla wjazdu");
-                    } else poprawnosc = 2;
-                }
-                ArrayList<int[]> listsciezka = new ArrayList<>();
-                System.out.println("Podaj stopień pierwszeństwa ścieżki (0 - najwyższa, kolejne liczby mniejsza)");
-                int p = wejscie.nextInt();
-                obliczanieSciezki(skrzyzowanie, drogaWe, slotWe, drogaWy, slotWy, listsciezka);
-                int[][] tabsciezka = new int[listsciezka.size()][2];
-                listsciezka.toArray(tabsciezka);
-                Sciezka sciezka = new Sciezka(drogaWe, slotWe, drogaWy, slotWy, tabsciezka,p);
-                sciezki.add(sciezka);
-                wejscie.nextLine();
-                System.out.print("Czy chcesz zobaczyc liste sciezek? (Tak/Nie): ");
-                test = wejscie.nextLine();
-                if (test.equals("Tak")) {
-                    for (int i = 0; i < sciezki.size(); i++)
-                        System.out.println("Sciezka nr " + i + ":\nWejscie: droga " + sciezki.get(i).drogaWe + " slot " + sciezki.get(i).slotWe + "\n" +
-                                "Wyjscie: droga " + sciezki.get(i).drogaWy +  " slot " + sciezki.get(i).slotWy + "\n o dlugosci " +
-                                sciezki.get(i).sciezka.length);
-                }
-                for (Sciezka value : sciezki) {
-                    System.out.println(Arrays.deepToString(value.getSciezka()));
+                } else {
+                    break;
                 }
             }
+            System.out.print("Czy chcesz zobaczyc liste sciezek? (Tak/Nie): ");
+            String test;
+            test = wejscie.nextLine();
+            if (test.equals("Tak")) {
+                for (int i = 0; i < sciezki.size(); i++)
+                    System.out.println("Sciezka nr " + i + ":\nWejscie: droga " + sciezki.get(i).drogaWe + " slot " +
+                            sciezki.get(i).slotWe + "\n" + "Wyjscie: droga " + sciezki.get(i).drogaWy +  " slot " + sciezki.get(i).slotWy + "\n o dlugosci " +
+                            sciezki.get(i).sciezka.length);
+                }
         }
     }
 }
