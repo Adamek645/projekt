@@ -1,5 +1,7 @@
 import org.w3c.dom.ls.LSOutput;
 
+import java.util.stream.DoubleStream;
+
 public class Map{
     private static Pojazd[][] mapa;
     private static int wielX, wielY;
@@ -26,8 +28,8 @@ public class Map{
         return mapa[x][y];
     }
     public static void mapClear(){
-        for(int i = 0; i < wielX; i++){
-            for (int j = 0; j < wielY; j++){
+        for(int i = 0; i <= wielX; i++){
+            for (int j = 0; j <= wielY; j++){
                     setMap(i,j,null);
                 }
             }
