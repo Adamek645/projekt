@@ -101,8 +101,6 @@ public class Main {
                                             j++;
                                         }
                                     }
-                                } else {
-                                    Pojazd.List.get(l).ruchPojazdu();
                                 }
                                 m--;
                             }
@@ -126,8 +124,10 @@ public class Main {
             Symulacja.count = 0;
             Symulacja.sumaV = 0;
             time = 0;
+            pojazdlimit = 30;
             a = 0;
             b = 1;
+            mapa.mapClear();
         }
     }
 }
