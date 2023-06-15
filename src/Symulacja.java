@@ -4,14 +4,6 @@ import java.util.Random;
 public class Symulacja {
     static double sumaPkt = 0;
     static int sumaV = 0, count = 0;
-  /*  static ZapisPliku save;
-     static {
-        try {
-            save = new ZapisPliku();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
     public static void symulacja(Skrzyzowanie skrzyzowanie){
     }
 

@@ -23,8 +23,8 @@ public class ZapisPliku{
         try{
                 FileWriter writer = new FileWriter("dane.txt", true);
                 writer.write("Number of vehicles: "+ a + "\n");
-                writer.write("Average speed(m/s): " + b + "\n");
-                writer.write("Time(s): " + c + "\n");
+                writer.write("Number of points: " + b + "\n");
+                writer.write("Time: " + c + "\n");
                 writer.close();
                 System.out.println("Dane zostały zapisane.");
 
