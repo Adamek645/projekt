@@ -1,1 +1,2 @@
 # projekt
+Repozytorium projektu studenckiego
